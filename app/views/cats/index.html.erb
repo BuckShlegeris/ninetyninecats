@@ -1,0 +1,55 @@
+<h1>all the cats</h1>
+<table>
+	<tr id="heading">
+		<td> </td>
+		<td> Name </td>
+		<td> Owner </td>
+		<td> Age </td>
+		<td> Color </td>
+		<td> Sex </td>
+		<td> Pending </td>
+		<td> Approved </td>
+		<td> Denied </td>
+	</tr>
+	<% @cats.each do |cat| %>
+		<tr>
+			<td>
+			<% if cat.url %>
+				<img src="<%= cat.url %>" alt="some_text">
+			<% else %>
+				<% cat.get_photo %>
+			<% end %>
+			</td>
+			<td>
+				<%= link_to(cat.name, cat_url(cat)) %>
+			</td>
+			<td>
+				<%= link_to(cat.owner.user_name, user_url(cat.owner)) %>
+			</td>
+			<td>
+				<%= cat.age %>
+			</td>
+			<td>
+				<%= cat.color %>
+			</td>
+			<td>
+				<%= cat.sex %>
+			</td>
+			<td>
+				<%= cat.cat_rental_requests.where(:status => "PENDING").count %>
+			</td>
+			<td>
+				<%= cat.cat_rental_requests.where(:status => "APPROVED").count %>
+			</td>
+			<td>
+				<%= cat.cat_rental_requests.where(:status => "DENIED").count %>
+			</td>
+		</tr>
+	<% end %>
+</table>
+
+<br>
+
+<% if current_user %>
+	<%= link_to("Make a new cat", new_cat_url) %>
+<% end %>

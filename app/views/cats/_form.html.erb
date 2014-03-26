@@ -1,0 +1,82 @@
+<form action= <%= action == :new ? cats_path : cat_path(cat) %>
+		method = "POST">
+
+	<% if action == :edit %>
+		<input type="hidden" name="_method" value="PUT">
+	<% end %>
+
+	<table>
+		<tr>
+			<td>
+				<label for="cat_name">
+					Name
+				</label
+			</td>
+			<td>
+				<input name="cat[name]" id="cat_name" type="text"
+				 <%= "value = #{cat.name}" if cat.name %>>
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<label for="cat_birth_date">
+					Birth date
+				</label
+			</td>
+			<td>
+				<input name="cat[birth_date]" id="birth_date" type="text"
+				 <%= "value = #{cat.birth_date}" if cat.birth_date %>>
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<label>Sex</label>
+			</td>
+			<td>
+				<div>
+			    <input
+						name="cat[sex]"
+						id="cat_sex_m"
+						type="radio"
+						<%= 'checked= "checked"' if cat.sex == "M"%>
+						value="M">
+
+			    <label for="cat_sex_m">Male</label>
+			    <input
+					name="cat[sex]"
+					id="cat_sex_f"
+					type="radio"
+					<%= 'checked= "checked"' if cat.sex == "F"%>
+					value="F">
+
+			    <label for="cat_sex_f">Female</label>
+
+			  </div>
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<label>
+					Color
+				</label>
+			</td>
+			<td>
+				<select id="cat_color" name="cat[color]">
+					<% %w(black white brown red gray striped).each do |color| %>
+						<option value="<%= color %>"
+							<%= "selected" if cat.color == color %>
+						>
+							<%= color.capitalize %>
+
+						</option>
+					<% end %>
+				</select>
+			</td>
+		</tr>
+	</table>
+
+<input type="submit" value=<%= action %>>
+</form>

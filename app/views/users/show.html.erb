@@ -1,0 +1,55 @@
+<h2><%=@user.user_name%>'s Cats</h2>
+
+	<table>
+		<tr id="heading">
+			<td> Name </td>
+			<td> Age </td>
+			<td> Color </td>
+			<td> Sex </td>
+			<td> Pending </td>
+			<td> Approved </td>
+			<td> Denied </td>
+		</tr>
+
+		<% @owned_cats.each do |cat| %>
+			<tr>
+				<td>
+					<%= link_to(cat.name, cat_url(cat)) %>
+				</td>
+				<td>
+					<%= cat.age %>
+				</td>
+				<td>
+					<%= cat.color %>
+				</td>
+				<td>
+					<%= cat.sex %>
+				</td>
+				<td>
+					<%= cat.cat_rental_requests.where(:status => "PENDING").count %>
+				</td>
+				<td>
+					<%= cat.cat_rental_requests.where(:status => "APPROVED").count %>
+				</td>
+				<td>
+					<%= cat.cat_rental_requests.where(:status => "DENIED").count %>
+				</td>
+			</tr>
+		<% end %>
+	</table>
+
+
+
+	<% if current_user && @user.id == current_user.id %>
+	<h2> devices where you're currently logged in </h2>
+
+	We're only showing this to you, not just everyone who looks at your user page.
+
+		<ul>
+			<% @sessions.each do |current_session| %>
+				<li>
+					<%= current_session.location %>
+				</li>
+			<% end%>
+		</ul>
+	<% end %>

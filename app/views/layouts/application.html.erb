@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>NinetyNineCats</title>
+  <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+</head>
+
+<body>
+
+<div id="title">
+  <h1>
+    <%=link_to "NinetyNineCats",cats_url %>
+  </h1>
+</div>
+
+<div id="userdetails">
+  <% if current_user.nil? %>
+    <%= link_to "Sign up", new_user_url %><br>
+    <%= link_to "Login", new_sessions_url %>
+  <% else %>
+    Hello <%= link_to(current_user.user_name, user_url(current_user.id)) %><br>
+    <%= button_to("Logout", sessions_url, :method => :delete)%>
+  <% end %>
+</div>
+
+<div id="main">
+
+<%= yield %>
+
+</div>
+
+</body>
+</html>
