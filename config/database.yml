@@ -13,7 +13,7 @@
 # gem 'pg'
 #
 development:
-  adapter: sqlite3
+  adapter: pg
   database: NinetyNineCats_development
   host: localhost
   username: buck2

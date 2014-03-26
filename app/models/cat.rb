@@ -22,12 +22,13 @@ class Cat < ActiveRecord::Base
   end
 
   def get_photo
+    puts "getting photo for #{self.name}"
+    sleep(4)
     page = open(
         "http://www.bing.com/images/search?q=#{self.name.split(" ").join("+")}"
             ).read
 
-    self.url = page.scan(/src="(http:\/\/ts4.mm.bing.net\/[^>]+)/).map{|x| x[0]}[0]
-    self.save!
+    self.url = page.scan(/src="(http:\/\/ts4.mm.bing.net\/[^>]+)/).map{|x| x[0]}.sample
   end
 
 end
