@@ -29,6 +29,9 @@ class Cat < ActiveRecord::Base
             ).read
 
     self.url = page.scan(/src="(http:\/\/ts4.mm.bing.net\/[^>]+)/).map{|x| x[0]}.sample
+    self.save!
   end
+
+  handle_asynchronously :get_photo
 
 end

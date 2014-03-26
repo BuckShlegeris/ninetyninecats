@@ -28,6 +28,8 @@ end
 
 gem 'pg'
 
+gem 'delayed_job_active_record'
+
 gem 'rails_12factor', group: :production
 
 

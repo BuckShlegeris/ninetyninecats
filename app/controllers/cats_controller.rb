@@ -15,9 +15,9 @@ class CatsController < ApplicationController
     @cat = Cat.new(params[:cat])
     @cat.user_id = current_user.id
 
-    @cat.get_photo
-    if @cat.save!
 
+    if @cat.save!
+      @cat.get_photo
       redirect_to cat_url(@cat)
     else
       render @cat.errors
